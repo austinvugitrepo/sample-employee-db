@@ -9,43 +9,57 @@ struct Employee {
   std::string year;
 };
 
-int main(){
-
+int main(){ 
   struct Employee emp;
   std::string* nameptr = &emp.name;
   std::string* idptr = &emp.id;
   std::string* emailptr = &emp.email;
   std::string* yearptr = &emp.year;
 
-  std::cout << "Enter your name:\n";
-  std::getline(std::cin, *nameptr);
-  std::cout << "Your name is " << *nameptr << std::endl; //remove later
-  std::cout << "Enter your employee ID:\n";
-  std::getline(std::cin, *idptr);
-  int tokcount = 0;
-  //creating token
-  char cidcopy[500];
-  strncpy(cidcopy, idptr->c_str(), sizeof(cidcopy) - 1);
-  cidcopy[sizeof(cidcopy) - 1] = '\0';
-  char* token = strtok(cidcopy, " ");
- // count token 
-  while (token != NULL) {
+  std::string loop = "i";
+   
+while (loop != "q") {
+  std::cout << "Welcome to Sample Employee Database!\n";
+  std::cout << "Press 'q' to quit the program, otherwise press any key to continue adding employee info to the database.\n";
+  std::getline(std::cin, loop);
+  if (loop.length() == 1){
+    std::cout << "\n";
+  } else {
+     std::cerr << "Error: NOT A VALID KEY, exiting...\n";
+     return 1;
+  }
+  if(loop == "q"){
+    break;
+  } else {
+     
+     std::cout << "Enter your name:\n";
+     std::getline(std::cin, *nameptr);
+     std::cout << "Your name is " << *nameptr << std::endl; //remove later
+     std::cout << "Enter your employee ID:\n";
+     std::getline(std::cin, *idptr);
+    int tokcount = 0;
+    //creating token
+    char cidcopy[500];
+    strncpy(cidcopy, idptr->c_str(), sizeof(cidcopy) - 1);
+    cidcopy[sizeof(cidcopy) - 1] = '\0';
+    char* token = strtok(cidcopy, " ");
+    // count token 
+    while (token != NULL) {
      tokcount++;
      token = strtok(NULL, " ");
-  }
+    }
 
-  int idnumver;
-  //converting id to integer
-  try { //try catch combo helps with not getting core dumped
-     idnumver = std::stoi(*idptr);
-  } catch (const std::invalid_argument& error){
+   //converting id to integer
+    try { //try catch combo helps with not getting core dumped
+    std::stoi(*idptr);
+   } catch (const std::invalid_argument& error){
     //error is variable, .what shows exact error message
     std::cerr << "Error: NOT A VALID NUMBER, try again: " << error.what() << std::endl;
     return 1;
-  }
+   }
   //token checker for " "
   if (tokcount == 1){
-    std::cout << "Your employee ID is " << idnumver << std::endl; //remove later
+    std::cout << "Your employee ID is " << *idptr << std::endl; //remove later
   } else {
     std::cout << "Error: Could not process ID, try again.\n";
   }
@@ -63,18 +77,18 @@ int main(){
      std::cerr << "Error: NOT A VALID 4 DIGIT NUMBER, try again:\n";
      return 1;
   }
-  int yearnum;
   //converting id to integer
   try { //try catch combo helps with not getting core dumped
-     yearnum = std::stoi(*yearptr);
+    std::stoi(*yearptr);
   } catch (const std::invalid_argument& error){
     //error is variable, .what shows exact error message
     std::cerr << "Error: NOT A VALID 4 DIGIT NUMBER, try again: " << error.what() << std::endl;
     return 1;
   }
-  std::cout << "Your birth year is " << yearnum << std::endl; //remove later
+  std::cout << "Your birth year is " << *yearptr << std::endl; //remove later
 
-  
-  
+
+   }
+ }
   return 0;
 }
