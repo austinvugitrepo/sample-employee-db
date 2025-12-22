@@ -19,23 +19,27 @@ int main(){
   std::string loop = "i";
    
 while (loop != "q") {
-  std::cout << "Welcome to Sample Employee Database!\n";
-  std::cout << "Press 'q' to quit the program, otherwise press any key to continue adding employee info to the database.\n";
+  std::cout << std::endl;
+  std::cout << "\033[1m" << std::string(63, '-') << "\033[0m " << std::endl;
+  std::cout << "| \033[1;3;36mWelcome to Sample Employee Database!\033[0m                        |" << std::endl;
+  std::cout << "| \033[35mUse this program to enter employee info into the database\033[0m   |" << std::endl;
+  std::cout << "| \033[1;32mPress 'q' to quit the program, press any key to continue...\033[0m |" << std::endl;
+  std::cout << "\033[1m" << std::string(63, '-') << "\033[0m " << std::endl;
   std::getline(std::cin, loop);
   if (loop.length() == 1){
-    std::cout << "\n";
   } else {
-     std::cerr << "Error: NOT A VALID KEY, exiting...\n";
-     return 1;
+     std::cout << std::string(27, '*') << std::endl;
+     std::cerr << "/ \033[31mERROR: NOT A VALID KEY!\033[0m /\n";
+     std::cout << std::string(27, '*') << std::endl;
+     continue;
   }
   if(loop == "q"){
     break;
   } else {
      
-     std::cout << "Enter your name:\n";
+     std::cout << "Enter your name: ";
      std::getline(std::cin, *nameptr);
-     std::cout << "Your name is " << *nameptr << std::endl; //remove later
-     std::cout << "Enter your employee ID:\n";
+     std::cout << "Enter your employee ID: ";
      std::getline(std::cin, *idptr);
     int tokcount = 0;
     //creating token
@@ -54,38 +58,44 @@ while (loop != "q") {
     std::stoi(*idptr);
    } catch (const std::invalid_argument& error){
     //error is variable, .what shows exact error message
-    std::cerr << "Error: NOT A VALID NUMBER, try again: " << error.what() << std::endl;
-    return 1;
+    std::cout << std::string(61, '*') << std::endl;
+    std::cerr << "/ \033[31mERROR: NOT A VALID NUMBER, try again:\033[0m " << error.what() << " /" << std::endl;
+    std::cout << std::string(61, '*') << std::endl;
+    continue;
    }
   //token checker for " "
   if (tokcount == 1){
-    std::cout << "Your employee ID is " << *idptr << std::endl; //remove later
   } else {
-    std::cout << "Error: Could not process ID, try again.\n";
+    std::cout << std::string(43, '*') << std::endl;
+    std::cout << "/ \033[31mERROR: Could not process ID, try again.\033[0m /\n";
+    std::cout << std::string(43, '*') << std::endl;
+    continue;
   }
   
-  std::cout << "Enter your email:\n";
+  std::cout << "Enter your email: ";
   std::getline(std::cin, *emailptr);
   std::cout << "Your email is " << *emailptr << std::endl; //remove later
                                                        
-  std::cout << "Enter your year of birth:\n";
+  std::cout << "Enter your year of birth: ";
   std::getline(std::cin, *yearptr);
   //4 digit checker begins here
   if (yearptr->length() == 4){
-    std::cout << "4 character response detected\n";
   } else {
-     std::cerr << "Error: NOT A VALID 4 DIGIT NUMBER, try again:\n";
-     return 1;
+    std::cout << std::string(48, '*') << std::endl;
+    std::cerr << "/ \033[31mERROR: NOT A VALID 4 DIGIT NUMBER, try again.\033[0m/\n";
+    std::cout << std::string(48, '*') << std::endl;
+     continue;
   }
   //converting id to integer
   try { //try catch combo helps with not getting core dumped
     std::stoi(*yearptr);
   } catch (const std::invalid_argument& error){
     //error is variable, .what shows exact error message
-    std::cerr << "Error: NOT A VALID 4 DIGIT NUMBER, try again: " << error.what() << std::endl;
-    return 1;
+    std::cout << std::string(69, '*') << std::endl;
+    std::cerr << "/ \033[31mERROR: NOT A VALID 4 DIGIT NUMBER, try again:\033[0m " << error.what() << " /" << std::endl;
+    std::cout << std::string(69, '*') << std::endl;
+    continue;
   }
-  std::cout << "Your birth year is " << *yearptr << std::endl; //remove later
 
 
    }
