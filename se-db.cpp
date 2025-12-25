@@ -10,7 +10,8 @@ struct Employee {
   std::string year;
 };
 
-int main(){ 
+int main(){
+  int empcounter = 0;
   struct Employee emp;
   std::string* nameptr = &emp.name;
   std::string* idptr = &emp.id;
@@ -18,7 +19,6 @@ int main(){
   std::string* yearptr = &emp.year;
 
   std::string loop = "i";
-  int empcounter = 0;
 
 while (loop != "q") {
   std::cout << "\033[2J\033[1;1H"; //clear screen when restarting loop
@@ -28,7 +28,7 @@ while (loop != "q") {
   std::cout << "| \033[35mUse this program to enter employee info into the database\033[0m   |" << std::endl;
   std::cout << "| \033[1;32mPress 'q' to quit the program, press any key to continue...\033[0m |" << std::endl;
   std::cout << "\033[1m" << std::string(63, '-') << "\033[0m " << std::endl;
-  std::cout << "Employees Registered: " << empcounter << std::endl;
+  std::cout << "Employees Pre-Registered: " << empcounter << std::endl;
   std::getline(std::cin, loop);
   std::cout << "\033[A\33[2K\r" << std::flush; //clear user input on previous line so user does not see their input
   if (loop.length() == 1){
@@ -40,7 +40,13 @@ while (loop != "q") {
      continue;
   }
   if(loop == "q"){
+    if(empcounter == 0) {
+    std::cout << "0 Employees Registered.\n";
     std::cout << "Exited Sucessfully.\n";
+    } else if (empcounter > 0){
+      std::cout << "Attempting to Register "<< empcounter << " Employees..." << std::endl;
+      std::cout << "Exited Sucessfully.\n";
+    }
     break;
   } else {
      
