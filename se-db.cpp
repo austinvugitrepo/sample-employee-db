@@ -46,7 +46,18 @@ while (loop != "q") {
       for(int i = 0; i < empcounter; i++){
         emp[i] = empdata[i];           // moving data collection array to final array
       }
-      std::cout << "Employess being sorted...\n"; // print for-loop debug section
+      //bubble sort
+      struct Employee tmp; //temporary variable
+      for(int i = 0; i < empcounter; i++){   // swap comparison for the array
+        for(int j = 0; j < empcounter - 1; j++){  //swap comparison for one loop; changing empcounter to instead empcounter -1 so we dont go out of bounds
+             if(emp[j].id > emp[j+1].id){
+                  tmp = emp[j];      //a goes to temp (empty)
+                  emp[j] = emp[j+1];  // b goes to a (empty)
+                  emp[j+1] = tmp;     // temp (a) goes to b(empty)
+             }
+        }
+      }
+      std::cout << "Sorted Employees:\n"; // print for-loop debug section
       for(int i = 0; i < empcounter; i++){
         std::cout << "---------------------\n";
         std::cout << emp[i].name << std::endl;
