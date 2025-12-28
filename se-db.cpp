@@ -17,14 +17,15 @@ int main(){
   std::string uid; // for emp id
   std::string uyear; // for emp year
   std::string loop = "i";
+  size_t position;
 
 while (loop != "q") {
   std::cout << "\033[2J\033[1;1H"; //clear screen when restarting loop
   std::cout << std::endl;
   std::cout << "\033[1m" << std::string(63, '-') << "\033[0m " << std::endl;
   std::cout << "| \033[1;3;36mWelcome to Sample Employee Database!\033[0m                        |" << std::endl;
-  std::cout << "| \033[35mUse this program to enter employee info into the database\033[0m   |" << std::endl;
-  std::cout << "| \033[1;32mPress 'q' to quit the program, press any key to continue...\033[0m |" << std::endl;
+  std::cout << "| \033[36mUse this program to enter employee info into the database\033[0m   |" << std::endl;
+  std::cout << "| \033[1;36mPress 'q' to quit the program, press any key to continue...\033[0m |" << std::endl;
   std::cout << "\033[1m" << std::string(63, '-') << "\033[0m " << std::endl;
   std::cout << "Employees Pre-Registered: " << empcounter << std::endl;
   std::getline(std::cin, loop);
@@ -75,15 +76,15 @@ while (loop != "q") {
      std::cout << "Enter your name: ";
      std::getline(std::cin, empdata[empcounter].name);
      std::cout << "\033[A\33[2K\r" << std::flush; //clear user input on previous line so user does not see their input
-     std::cout << "Enter your employee ID: ";
+     std::cout << "Enter your employee ID (000-999): ";
      std::getline(std::cin, uid);
      std::cout << "\033[A\33[2K\r" << std::flush; //clear user input on previous line so user does not see their input
      //3 digit checker begins here
      if (uid.length() == 3){
     } else {
-    std::cout << std::string(48, '*') << std::endl;
+    std::cout << std::string(53, '*') << std::endl;
     std::cerr << "/ \033[31mERROR: NOT A VALID 3 DIGIT EMPLOYEE ID, try again.\033[0m/\n";
-    std::cout << std::string(48, '*') << std::endl;
+    std::cout << std::string(53, '*') << std::endl;
     std::this_thread::sleep_for(std::chrono::milliseconds(550)); //main thread program sleeps .550 seconds
     continue;
     }
@@ -113,7 +114,14 @@ while (loop != "q") {
 
    //converting id to integer
     try { //try catch combo helps with not getting core dumped
-   empdata[empcounter].id = std::stoi(uid);
+   empdata[empcounter].id = std::stoi(uid, &position); //position changes
+   if(position != uid.length()){
+    std::cout << std::string(42, '*') << std::endl;
+    std::cerr << "/ \033[31mERROR: NOT A VALID NUMBER, try again:\033[0m " << " /" << std::endl;
+    std::cout << std::string(42, '*') << std::endl;
+    std::this_thread::sleep_for(std::chrono::milliseconds(550)); //main thread program sleeps .550 seconds
+    continue;
+   }
    } catch (const std::invalid_argument& error){
     //error is variable, .what shows exact error message
     std::cout << std::string(61, '*') << std::endl;
@@ -132,9 +140,9 @@ while (loop != "q") {
   //4 digit checker begins here
   if (uyear.length() == 4){
   } else {
-    std::cout << std::string(48, '*') << std::endl;
-    std::cerr << "/ \033[31mERROR: NOT A VALID 4 DIGIT NUMBER, try again.\033[0m/\n";
-    std::cout << std::string(48, '*') << std::endl;
+    std::cout << std::string(46, '*') << std::endl;
+    std::cerr << "/ \033[31mERROR: NOT A VALID 4 DIGIT YEAR, try again.\033[0m/\n";
+    std::cout << std::string(46, '*') << std::endl;
     std::this_thread::sleep_for(std::chrono::milliseconds(550)); //main thread program sleeps .550 seconds
     continue;
   }
@@ -154,16 +162,23 @@ while (loop != "q") {
     //token checker for " "
    if (ytokcount == 1){
    } else {
-    std::cout << std::string(43, '*') << std::endl;
-    std::cout << "/ \033[31mERROR: Could not process ID, try again.\033[0m /\n";
-    std::cout << std::string(43, '*') << std::endl;
+    std::cout << std::string(45, '*') << std::endl;
+    std::cout << "/ \033[31mERROR: Could not process year, try again.\033[0m /\n";
+    std::cout << std::string(45, '*') << std::endl;
     std::this_thread::sleep_for(std::chrono::milliseconds(550)); //main thread program sleeps .550 seconds
     continue;
    }
   
   //converting id to integer
   try { //try catch combo helps with not getting core dumped
-   empdata[empcounter].year = std::stoi(uyear);
+   empdata[empcounter].year = std::stoi(uyear, &position);
+   if(position != uyear.length()){
+    std::cout << std::string(42, '*') << std::endl;
+    std::cerr << "/ \033[31mERROR: NOT A VALID NUMBER, try again:\033[0m " << " /" << std::endl;
+    std::cout << std::string(42, '*') << std::endl;
+    std::this_thread::sleep_for(std::chrono::milliseconds(550)); //main thread program sleeps .550 seconds
+    continue;
+   } 
   } catch (const std::invalid_argument& error){
     //error is variable, .what shows exact error message
     std::cout << std::string(69, '*') << std::endl;
