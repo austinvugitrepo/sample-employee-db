@@ -5,7 +5,7 @@
 extern "C" {   // start of C and C++ interaction
 #endif         
 
-void writetodb();
+int writetodb();
 
 
 
