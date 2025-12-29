@@ -3,6 +3,8 @@
 #include <cstring> // C
 #include <chrono> // time
 #include <thread> // for sleep
+#include "candcpp.h"
+
 struct Employee {
   std::string name;
   int id;
@@ -22,6 +24,9 @@ int main(){
 while (loop != "q") {
   std::cout << "\033[2J\033[1;1H"; //clear screen when restarting loop
   std::cout << std::endl;
+
+  writetodb(); // Testing C function
+
   std::cout << "\033[1m" << std::string(63, '-') << "\033[0m " << std::endl;
   std::cout << "| \033[1;3;36mWelcome to Sample Employee Database!\033[0m                        |" << std::endl;
   std::cout << "| \033[36mUse this program to enter employee info into the database\033[0m   |" << std::endl;
