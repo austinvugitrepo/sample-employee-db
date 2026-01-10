@@ -12,7 +12,7 @@ struct Employee {
 
 int main(){
   int empcounter = 0;
-  int MAX_EMP = 999; // max number of employees
+  const int MAX_EMP = 999; // max number of employees
   struct Employee empdata[MAX_EMP]; //array for data collection
   std::string uid; // for emp id
   std::string uyear; // for emp year
