@@ -3,6 +3,8 @@
 #include <cstring> // C
 #include <chrono> // time
 #include <thread> // for sleep
+#include "candcpp.h"
+
 struct Employee {
   std::string name;
   int id;
@@ -67,6 +69,9 @@ while (loop != "q") {
         std::cout << emp[i].email << std::endl;
         std::cout << emp[i].year << std::endl;
       }
+
+      writetodb(); // Testing C function
+      
       delete[] emp; // free memory 
       std::cout << "Exited Sucessfully.\n";
     }
