@@ -9,11 +9,12 @@ Sample Employee Database Program (SEDP) is a program that makes the process of e
 ```bash
 chmod +x build
 ./build
+sudo make install
 ```
 to clean up:
 
 ```bash
-make clean
+sudo make uninstall
 ```
 ## Future plans:
 
