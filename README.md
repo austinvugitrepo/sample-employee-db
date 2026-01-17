@@ -7,9 +7,8 @@ Sample Employee Database Program (SEDP) is a program that makes the process of e
 ## How to compile and run on your system:
 
 ```bash
-make
-make link
-make run
+chmod +x build
+./build
 ```
 to clean up:
 
